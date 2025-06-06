@@ -18,7 +18,10 @@ import typing
 import torch
 import torch.utils.cpp_extension as _cpp_extension
 
-import research_utilities.common as _common
+import radpsd.common as _common
+
+# ----------------------------------------------------------------------------------------------------------------------------------------------------------
+# Extension specification
 
 
 @dataclasses.dataclass(frozen=True)
@@ -58,12 +61,13 @@ class Extension:
     timestamp  : str
     # autopep8: on
 
+# ----------------------------------------------------------------------------------------------------------------------------------------------------------
+# Extension loader
+
 
 class ExtensionLoader:
     def __init__(self, src_dir: str = 'csrc'):
-        # self._logger = _common.get_logger()
-        import logging
-        self._logger = logging.getLogger(__name__)
+        self._logger = _common.get_logger()
 
         self.extensions: dict[str, Extension] = {}
 
@@ -178,8 +182,8 @@ class ExtensionLoader:
             extra_cflags += ['/O2']
             extra_cuda_cflags += ['/O2']
         else:
-            extra_cflags += ['-O3']
-            extra_cuda_cflags += ['-O3']
+            extra_cflags += ['-O2']
+            extra_cuda_cflags += ['-O2']
 
         # Add OpenMP flags
         if with_omp:
@@ -257,6 +261,11 @@ class ExtensionLoader:
         return module
 
 
+# ----------------------------------------------------------------------------------------------------------------------------------------------------------
+# Get the extension loader instance with caching
+
 @functools.lru_cache(maxsize=None)
 def get_extension_loader(*args, **kwargs):
     return ExtensionLoader(*args, **kwargs)
+
+# ----------------------------------------------------------------------------------------------------------------------------------------------------------
