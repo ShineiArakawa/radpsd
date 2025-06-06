@@ -25,7 +25,6 @@ def _get_cpp_module(is_cuda: bool = True, with_omp: bool = True) -> typing.Any:
     if is_cuda:
         sources += [
             'signal.cu',
-            'resampling.cu',
         ]
         name += '_cuda'
 
