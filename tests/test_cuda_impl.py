@@ -11,14 +11,14 @@ def test_cpu_cuda_compatibility(seed: int):
 
     conftest.seed_all(seed)
 
-    img = torch.randn((4, 4), dtype=torch.float64)
+    img = torch.randn((16, 3, 64, 64), dtype=torch.float64)
 
     # Test CPU implementation
-    psd_cpu = radpsd.compute_radial_psd(img, 4, 4)
+    psd_cpu = radpsd.compute_radial_psd(img, 360, 1024)
 
     # Test CUDA implementation
     img_cuda = img.to('cuda')
-    psd_cuda = radpsd.compute_radial_psd(img_cuda, 4, 4)
+    psd_cuda = radpsd.compute_radial_psd(img_cuda, 360, 1024)
 
     # Ensure the results are close enough
     assert torch.allclose(psd_cpu, psd_cuda.cpu(), atol=1e-5), "CPU and CUDA results do not match within tolerance."

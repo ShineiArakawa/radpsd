@@ -1,10 +1,10 @@
 [project]
 name = "radpsd"
-version = "1.0.0"
+version = "1.1.0"
 description = "Radial PSD (Power Spectral Density) calculation library"
 license = { file = "LICENSE" }
 readme = "README.md"
-authors = [{ name = "Shinei Arakawa", email = "arakawashinei1115@gmail.com" }]
+authors = [{ name = "Shinei Arakawa", email = "sarakawalab@gmail.com" }]
 requires-python = ">=3.11"
 dependencies = ["numpy", "torch"]
 
@@ -13,7 +13,8 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [dependency-groups]
-dev = [
-    "loguru>=0.7.3",
-    "pytest>=8.4.0",
-]
+dev = ["loguru>=0.7.3", "pytest>=8.4.0"]
+
+[tool.pytest.ini_options]
+log_cli = true
+log_cli_level = "DEBUG"
