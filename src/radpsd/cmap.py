@@ -18,6 +18,18 @@ if _cmap_lut_file.exists():
         for key, value in data.items():
             _cmap_luts[key] = value
 
+
+def available_color_maps() -> set[str]:
+    """Return a list of available color maps.
+
+    Returns
+    -------
+    set[str]
+        A set of available color map names.
+    """
+
+    return set(_cmap_luts.keys())
+
 # ------------------------------------------------------------------------------------------------------------
 # Interpolation function
 #
@@ -73,6 +85,24 @@ ArrayLike = typing.TypeVar('ArrayLike', np.ndarray, torch.Tensor)
 
 
 def apply_color_map(input_img: ArrayLike, color_map_type: str = 'viridis') -> ArrayLike:
+    """Apply a color map to a 2D or 3D image.
+    This function is differenciable and can be used in PyTorch models.
+
+    Parameters
+    ----------
+    input_img : ArrayLike
+        Input image as a 2D (height, width) or 3D (batch, height, width) array.
+    color_map_type : str, optional
+        Type of color map to apply, by default 'viridis'.
+        You can choose from the available color maps using `available_color_maps()`.
+
+    Returns
+    -------
+    ArrayLike
+        Color-mapped image as a 3D (height, width, 3) or 4D (batch, height, width, 3) array.
+        The output is in RGB format.
+    """
+
     assert input_img.ndim in (2, 3), "Input image must be a 2D (HW) or 3D (BHW) array."
     assert color_map_type in _cmap_luts, f"Color map '{color_map_type}' is not supported. You can choose from: {list(_cmap_luts.keys())}"
 
@@ -132,3 +162,5 @@ def apply_color_map(input_img: ArrayLike, color_map_type: str = 'viridis') -> Ar
         colorred = colorred.detach().cpu().numpy()
 
     return colorred
+
+# ------------------------------------------------------------------------------------------------------------

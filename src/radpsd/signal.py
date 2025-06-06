@@ -1,3 +1,6 @@
+"""Signal processing module for computing power spectral density and radial profiles.
+"""
+
 import functools
 import typing
 
