@@ -17,7 +17,7 @@ Contact
 import sys
 
 if sys.version_info < (3, 11):
-    raise ImportError("Python 3.11 or higher is required.")
+    raise ImportError('Python 3.11 or higher is required.')
 
 # ----------------------------------------------------------------------------
 # Check the version of this package
@@ -25,21 +25,23 @@ if sys.version_info < (3, 11):
 import importlib.metadata
 
 try:
-    __version__ = importlib.metadata.version("radpsd")
+    __version__ = importlib.metadata.version('radpsd')
 except importlib.metadata.PackageNotFoundError:
     # package is not installed
-    __version__ = "0.0.0"
+    __version__ = '0.0.0'
 
 # ----------------------------------------------------------------------------
 # Import modules
 
+from .cmap import apply_color_map
 from .signal import compute_psd, compute_radial_psd, radial_freq
 
 __all__ = [
-    "__version__",
-    "compute_psd",
-    "compute_radial_psd",
-    "radial_freq",
+    '__version__',
+    'apply_color_map',
+    'compute_psd',
+    'compute_radial_psd',
+    'radial_freq',
 ]
 
 # ----------------------------------------------------------------------------
