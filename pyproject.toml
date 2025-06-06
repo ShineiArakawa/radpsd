@@ -1,0 +1,13 @@
+[project]
+name = "radpsd"
+version = "1.0.0"
+description = "Radial PSD (Power Spectral Density) calculation library"
+license = { file = "LICENSE" }
+readme = "README.md"
+authors = [{ name = "Shinei Arakawa", email = "arakawashinei1115@gmail.com" }]
+requires-python = ">=3.11"
+dependencies = []
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
